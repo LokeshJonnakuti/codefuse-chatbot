@@ -1,8 +1,9 @@
-import docker, sys, os, time, requests, psutil, json
+import docker, sys, os, time, psutil, json
 import subprocess
 import webbrowser
-from docker.types import Mount, DeviceRequest
+from docker.types import Mount
 from loguru import logger
+from security import safe_requests
 
 src_dir = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -124,7 +125,7 @@ def start_sandbox_service(network_name ='my_network'):
         retry_nums = 3
         while retry_nums>0:
             logger.info(f"http://localhost:{SANDBOX_SERVER['port']}")
-            response = requests.get(f"http://localhost:{SANDBOX_SERVER['port']}", timeout=270)
+            response = safe_requests.get(f"http://localhost:{SANDBOX_SERVER['port']}", timeout=270)
             if response.status_code == 200:
                 logger.info("container & notebook init success")
                 break

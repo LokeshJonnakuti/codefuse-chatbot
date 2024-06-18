@@ -8,14 +8,12 @@ import json
 import os
 from requests.exceptions import Timeout
 from urllib.parse import urlsplit
-import re
-import math
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import WebDriverException, TimeoutException
-from selenium.webdriver.common.by import By
+from security import safe_requests
 
 
 class WebHtmlExtractor():
@@ -210,8 +208,7 @@ class WebHtmlExtractor():
         # 发送请求，超时10s重试
         try:
             if method == "get":
-                response = requests.get(
-                    url, headers=self.header, timeout=time_out)
+                response = safe_requests.get(url, headers=self.header, timeout=time_out)
             elif method == "post":
                 response = requests.post(
                     url, headers=self.header, data=self.data, timeout=time_out)
