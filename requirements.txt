@@ -44,3 +44,4 @@ codefuse-muagent
 
 # vllm model
 # vllm; sys_platform == "linux"
+security==1.3.1

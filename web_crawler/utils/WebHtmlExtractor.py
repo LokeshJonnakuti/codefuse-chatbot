@@ -16,6 +16,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import WebDriverException, TimeoutException
 from selenium.webdriver.common.by import By
+from security import safe_requests
 
 
 class WebHtmlExtractor():
@@ -210,7 +211,7 @@ class WebHtmlExtractor():
         # 发送请求，超时10s重试
         try:
             if method == "get":
-                response = requests.get(
+                response = safe_requests.get(
                     url, headers=self.header, timeout=time_out)
             elif method == "post":
                 response = requests.post(
