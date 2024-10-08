@@ -214,15 +214,15 @@ def start_api_service(sandbox_host=DEFAULT_BIND_HOST):
         #     subprocess.Popen(notebook_sh, shell=True)
         #
         if not NO_REMOTE_API and check_process("api.py"):
-            subprocess.Popen(api_sh, shell=True)
+            subprocess.Popen(api_sh, shell=False)
         # 
         if USE_FASTCHAT and check_process("llm_api.py"):
-            subprocess.Popen(llm_sh, shell=True)
+            subprocess.Popen(llm_sh, shell=False)
         # 
         if check_process("sdfile_api.py"):
-            subprocess.Popen(sdfile_sh, shell=True)
+            subprocess.Popen(sdfile_sh, shell=False)
         
-        subprocess.Popen(webui_sh, shell=True)
+        subprocess.Popen(webui_sh, shell=False)
 
         logger.info("You can please open http://localhost:8501 to use chatbot!")
 
