@@ -46,7 +46,7 @@ class TianGongWorker(ApiModelWorker):
         }
         
         # 发起请求并获取响应
-        response = requests.post(url, headers=headers, json=data, stream=True)
+        response = requests.post(url, headers=headers, json=data, stream=True, timeout=60)
 
         text = ""
         # 处理响应流
